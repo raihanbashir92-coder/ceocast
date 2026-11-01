@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>THE CEOCAST</title>
+<meta name="description" content="Raw and unfiltered conversations with the world's most inspiring entrepreneurs. New episode every Sunday.">
+<meta name="theme-color" content="#141414">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="THE CEOCAST">
+<meta property="og:description" content="Raw and unfiltered conversations with the world's most inspiring entrepreneurs.">
+<meta property="og:image" content="thumb.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="logo.webp" type="image/webp">
+<link rel="preload" href="logo.webp" as="image" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #141414;
+    --card: #1E1E1E;
+    --tile: #262626;
+    --border: #333230;
+    --accent: #F6C347;
+    --accent-dark: #E0A92A;
+    --text: #FFFFFF;
+    --muted: #A8A39A;
+    --ink: #141414;
+    --radius: 12px;
+    --ease: cubic-bezier(.2, .7, .3, 1);
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-weight: 500;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+
+  main {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: max(36px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  section { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Header */
+  header { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .logo {
+    width: 132px; height: 132px; border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--accent), 0 0 0 9px var(--bg), 0 0 0 10px var(--border);
+    margin: 10px 0 26px;
+    background: var(--accent);
+  }
+  h1 { margin: 0; line-height: 1; transform: skewX(-8deg); text-transform: uppercase; }
+  .wm-the {
+    display: block;
+    font: 800 20px/1 "Barlow Condensed", sans-serif;
+    letter-spacing: .18em;
+    color: var(--accent);
+    margin-bottom: 2px;
+  }
+  .wm-main {
+    display: block;
+    font: 400 54px/1 "Anton", Impact, sans-serif;
+    letter-spacing: .01em;
+    text-shadow: 3px 3px 0 #000;
+  }
+  .tagline { margin: 14px auto 16px; max-width: 32ch; color: var(--muted); font-size: 16px; }
+  .tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--ink);
+    font: 800 15px/1 "Barlow Condensed", sans-serif;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    transform: skewX(-8deg);
+  }
+  .tag span { display: inline-block; transform: skewX(8deg); }
+
+  /* Section labels */
+  .label {
+    display: flex; align-items: center; gap: 12px;
+    margin: 0;
+    font: 700 13px/1 "Barlow Condensed", sans-serif;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .label::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+  /* Latest episode */
+  .episode {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .episode:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 12px 28px rgba(0,0,0,.45); }
+  .thumb { position: relative; aspect-ratio: 16 / 9; background: var(--tile); }
+  .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .badge {
+    position: absolute; top: 12px; left: 12px;
+    background: var(--accent); color: var(--ink);
+    font: 800 13px/1 "Barlow Condensed", sans-serif;
+    letter-spacing: .1em;
+    padding: 5px 8px 4px;
+    border-radius: 4px;
+  }
+  .play {
+    position: absolute; top: 50%; left: 50%;
+    width: 64px; height: 64px; margin: -32px 0 0 -32px;
+    border-radius: 50%;
+    background: var(--accent); color: var(--ink);
+    display: grid; place-items: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,.5);
+    transition: transform .25s var(--ease), background-color .25s var(--ease);
+  }
+  .play svg { width: 26px; height: 26px; margin-left: 4px; }
+  .episode:hover .play { transform: scale(1.12); }
+  .ep-body { padding: 14px 16px 16px; }
+  .ep-title {
+    margin: 0 0 6px;
+    font: 800 22px/1.1 "Barlow Condensed", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .01em;
+    overflow-wrap: anywhere;
+  }
+  .ep-cta { color: var(--accent); font-weight: 700; font-size: 15px; }
+
+  /* Link rows */
+  .links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .row {
+    display: flex; align-items: center; gap: 14px;
+    min-height: 60px;
+    padding: 10px 16px 10px 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: background-color .2s var(--ease), border-color .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+  }
+  .icon {
+    flex: none;
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--tile);
+    color: var(--accent);
+    display: grid; place-items: center;
+    transition: background-color .2s var(--ease), color .2s var(--ease);
+  }
+  .icon svg { width: 22px; height: 22px; }
+  .row-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .row-name { font: 700 18px/1.15 "Barlow Condensed", sans-serif; letter-spacing: .02em; text-transform: uppercase; }
+  .row-handle { font-size: 14px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; transition: color .2s var(--ease); }
+  .arrow { flex: none; font-size: 18px; font-weight: 700; color: var(--muted); transition: color .2s var(--ease), transform .2s var(--ease); }
+  .row:hover, .row:focus-visible { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .row:hover .row-handle, .row:focus-visible .row-handle,
+  .row:hover .arrow, .row:focus-visible .arrow { color: var(--ink); }
+  .row:hover .arrow { transform: translate(2px, -2px); }
+  .row:hover .icon, .row:focus-visible .icon { background: var(--ink); color: var(--accent); }
+  .row:active { transform: scale(.985); }
+
+  /* Email */
+  .row.email { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .row.email .icon { background: var(--ink); color: var(--accent); }
+  .row.email .row-handle, .row.email .arrow { color: var(--ink); opacity: .8; }
+  .row.email:hover, .row.email:focus-visible { background: var(--text); border-color: var(--text); }
+  .copy {
+    align-self: center;
+    margin-top: 2px;
+    background: none; border: 0; padding: 6px 8px;
+    color: var(--muted);
+    font: 600 14px "Barlow", sans-serif;
+    text-decoration: underline; text-underline-offset: 3px;
+    cursor: pointer;
+  }
+  .copy:hover { color: var(--text); }
+
+  footer { text-align: center; color: var(--muted); font-size: 13px; padding-top: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .episode:hover, .episode:hover .play, .row:hover .arrow, .row:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-yt" viewBox="0 0 24 24"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.1V8.9L15.5 12l-5.8 3.1Z"/></symbol>
+  <symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M16.6 2h-3.4v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.2a6.3 6.3 0 1 0 5.4 6.2V8.6a8 8 0 0 0 4.6 1.5V6.7a4.6 4.6 0 0 1-4.6-4.7Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 7 8.5-7"/></g></symbol>
+</svg>
+
+<main>
+  <header>
+    <img class="logo" src="logo.webp" width="132" height="132" alt="Raheem, host of THE CEOCAST" fetchpriority="high">
+    <h1><span class="wm-the">The</span><span class="wm-main">CEOCAST</span></h1>
+    <p class="tagline">Raw and unfiltered conversations with the world's most inspiring entrepreneurs.</p>
+    <div class="tag"><span>New episode every Sunday</span></div>
+  </header>
+
+  <section aria-labelledby="l-latest">
+    <h2 class="label" id="l-latest">Latest episode</h2>
+    <a class="episode" id="ep-link" href="https://www.youtube.com/watch?v=X8FYwC_ls0k" target="_blank" rel="noopener">
+      <div class="thumb">
+        <img id="ep-thumb" src="thumb.jpg?v=X8FYwC_ls0k" width="800" height="450" alt="" decoding="async"
+             onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/'+(window.__epId||'X8FYwC_ls0k')+'/hqdefault.jpg'">
+        <span class="badge">NEW</span>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 4.5v15L19.5 12z"/></svg></span>
+      </div>
+      <div class="ep-body">
+        <h3 class="ep-title" id="ep-title">The Story Behind Lord Aleem</h3>
+        <span class="ep-cta">Watch on YouTube →</span>
+      </div>
+    </a>
+  </section>
+
+  <section aria-labelledby="l-show">
+    <h2 class="label" id="l-show">The CEOCAST</h2>
+    <ul class="links">
+      <li><a class="row" href="https://www.youtube.com/@ceocast?sub_confirmation=1" target="_blank" rel="noopener">
+        <span class="icon"><svg aria-hidden="true"><use href="#i-yt"/></svg></span>
+        <span class="row-text"><span class="row-name">YouTube</span><span class="row-handle">@ceocast · Subscribe</span></span>
+        <span class="arrow" aria-hidden="true">↗</span></a></li>
+      <li><a class="row" href="https://www.tiktok.com/@ceocast" target="_blank" rel="noopener">
+        <span class="icon"><svg aria-hidden="true"><use href="#i-tt"/></svg></span>
+        <span class="row-text"><span class="row-name">TikTok</span><span class="row-handle">@ceocast</span></span>
+        <span class="arrow" aria-hidden="true">↗</span></a></li>
+      <li><a class="row" href="https://www.instagram.com/ceocast/" target="_blank" rel="noopener">
+        <span class="icon"><svg aria-hidden="true"><use href="#i-ig"/></svg></span>
+        <span class="row-text"><span class="row-name">Instagram</span><span class="row-handle">@ceocast</span></span>
+        <span class="arrow" aria-hidden="true">↗</span></a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="l-host">
+    <h2 class="label" id="l-host">Your host · Raheem</h2>
+    <ul class="links">
+      <li><a class="row" href="https://www.youtube.com/@MrCEOX" target="_blank" rel="noopener">
+        <span class="icon"><svg aria-hidden="true"><use href="#i-yt"/></svg></span>
+        <span class="row-text"><span class="row-name">YouTube · Mr CEO</span><span class="row-handle">@MrCEOX</span></span>
+        <span class="arrow" aria-hidden="true">↗</span></a></li>
+      <li><a class="row" href="https://www.tiktok.com/@ceoraheem" target="_blank" rel="noopener">
+        <span class="icon"><svg aria-hidden="true"><use href="#i-tt"/></svg></span>
+        <span class="row-text"><span class="row-name">TikTok</span><span class="row-handle">@ceoraheem</span></span>
+        <span class="arrow" aria-hidden="true">↗</span></a></li>
+      <li><a class="row" href="https://www.instagram.com/raheemka/" target="_blank" rel="noopener">
+        <span class="icon"><svg aria-hidden="true"><use href="#i-ig"/></svg></span>
+        <span class="row-text"><span class="row-name">Instagram</span><span class="row-handle">@raheemka</span></span>
+        <span class="arrow" aria-hidden="true">↗</span></a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="l-book">
+    <h2 class="label" id="l-book">Bookings &amp; enquiries</h2>
+    <a class="row email" href="mailto:ceocastinfo@gmail.com?subject=CEOCAST%20enquiry">
+      <span class="icon"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>
+      <span class="row-text"><span class="row-name">Email us</span><span class="row-handle">ceocastinfo@gmail.com</span></span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </a>
+    <button class="copy" type="button" id="copy" aria-live="polite">Copy email address</button>
+  </section>
+
+  <footer>© The CEOCAST</footer>
+</main>
+
+<script>
+(function () {
+  // Latest episode: latest.json is refreshed by the GitHub Action; the HTML above is the fallback.
+  fetch('latest.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) {
+      if (!d || !/^[\w-]{11}$/.test(d.id)) return;
+      window.__epId = d.id;
+      document.getElementById('ep-link').href = 'https://www.youtube.com/watch?v=' + d.id;
+      if (d.title) document.getElementById('ep-title').textContent = d.title;
+      var img = document.getElementById('ep-thumb');
+      var src = 'thumb.jpg?v=' + encodeURIComponent(d.id);
+      if (img.getAttribute('src') !== src) img.src = src;
+    })
+    .catch(function () {});
+
+  // Copy email
+  var btn = document.getElementById('copy');
+  var email = 'ceocastinfo@gmail.com';
+  var timer;
+  function done() {
+    btn.textContent = 'Copied';
+    clearTimeout(timer);
+    timer = setTimeout(function () { btn.textContent = 'Copy email address'; }, 2000);
+  }
+  function fallback() {
+    var t = document.createElement('textarea');
+    t.value = email; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+    document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    document.body.removeChild(t);
+  }
+  btn.addEventListener('click', function () {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(email).then(done, fallback);
+    } else {
+      fallback();
+    }
+  });
+})();
+</script>
+</body>
+</html>
